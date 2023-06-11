@@ -19,6 +19,8 @@ pub fn hash_password_simple(password: String, salt_b64: String) -> Result<String
 pub fn verify_password(password: String, password_hash: String) -> Result<bool, JsError> {
     let parsed_password_hash = PasswordHash::new(&password_hash)
         .map_err(|e| JsError::new(&format!("[PasswordHash::new] {}", e)))?;
+
+    // not throw for Error::Password
     let result = Argon2::default().verify_password(password.as_bytes(), &parsed_password_hash);
     match result {
         Ok(()) => Ok(true),

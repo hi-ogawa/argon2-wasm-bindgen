@@ -37,11 +37,12 @@ describe(hash_password_simple, () => {
 
 describe("example", () => {
   it("basic", async () => {
-    const salt = btoa("salt".repeat(3));
-    expect(salt).toMatchInlineSnapshot('"c2FsdHNhbHRzYWx0"');
+    // base64 encoding without "=" padding
+    const salt_b64 = btoa("salt".repeat(3));
+    expect(salt_b64).toMatchInlineSnapshot('"c2FsdHNhbHRzYWx0"');
 
     const password = "pepper";
-    const password_hash = hash_password_simple(password, salt);
+    const password_hash = hash_password_simple(password, salt_b64);
     expect(password_hash).toMatchInlineSnapshot(
       '"$argon2id$v=19$m=19456,t=2,p=1$c2FsdHNhbHRzYWx0$In0aM6WcpzTnOC0J2iJ8Us5IfVCteAX3tEfKF2tNlIQ"'
     );
