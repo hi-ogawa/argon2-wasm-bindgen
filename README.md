@@ -7,4 +7,8 @@ wasm-bindgen wrapper for [`RustCrypto argon2`](https://github.com/RustCrypto/pas
 pnpm i
 pnpm build
 pnpm test
+
+# release
+pnpm build
+pnpm release
 ```
