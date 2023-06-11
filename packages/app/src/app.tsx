@@ -69,7 +69,12 @@ function Argon2Form() {
           />
         </label>
         <label class="flex flex-col gap-1">
-          <span>Salt</span>
+          <span class="flex items-baseline gap-2">
+            <span>Salt</span>
+            <span class="text-colorTextLabel text-sm">
+              (at least 8 characters)
+            </span>
+          </span>
           <input
             class="antd-input px-1"
             value={untrack(() => form.salt)}
