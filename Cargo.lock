@@ -18,6 +18,7 @@ name = "argon2_wasm_bindgen"
 version = "0.0.0"
 dependencies = [
  "argon2",
+ "password-hash",
  "wasm-bindgen",
 ]
 

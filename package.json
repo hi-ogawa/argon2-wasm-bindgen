@@ -1,12 +1,17 @@
 {
   "name": "@hiogawa/argon2-wasm-bindgen",
-  "version": "0.0.0",
-  "type": "module",
+  "version": "0.0.2-pre.1",
+  "type": "commonjs",
   "main": "./pkg/index.js",
   "types": "./pkg/index.d.ts",
   "files": [
     "pkg/*"
   ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hi-ogawa/argon2-wasm-bindgen"
+  },
   "scripts": {
     "build": "run-s build:*",
     "build:wasm": "wasm-pack build --target web --out-name index ${BUILD_TYPE:---release}",
@@ -18,7 +23,8 @@
     "lint:cargo-fmt": "cargo fmt",
     "lint-check:cargo-fmt": "cargo fmt --check",
     "tsc": "tsc -b",
-    "test": "vitest"
+    "test": "vitest",
+    "release": "pnpm publish --no-git-checks --access public"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.1",
