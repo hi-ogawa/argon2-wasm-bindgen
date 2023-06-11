@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "include": ["src", "test"],
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "Node16",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"]
+  }
+}

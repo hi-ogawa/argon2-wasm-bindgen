@@ -1,0 +1,31 @@
+{
+  "name": "@hiogawa/argon2-wasm-bindgen",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./pkg/index.js",
+  "types": "./pkg/index.d.ts",
+  "files": [
+    "pkg/*"
+  ],
+  "scripts": {
+    "build": "run-s build:*",
+    "build:wasm": "wasm-pack build --target web --out-name index ${BUILD_TYPE:---release}",
+    "build:fix-pkg": "rm -f pkg/package.json pkg/.gitignore pkg/README.md",
+    "lint": "run-s lint:*",
+    "lint-check": "run-s lint-check:*",
+    "lint:prettier": "prettier --cache --write .",
+    "lint-check:prettier": "prettier --cache --check .",
+    "lint:cargo-fmt": "cargo fmt",
+    "lint-check:cargo-fmt": "cargo fmt --check",
+    "tsc": "tsc -b",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.3",
+    "vitest": "^0.32.0",
+    "wasm-pack": "^0.11.1"
+  }
+}
