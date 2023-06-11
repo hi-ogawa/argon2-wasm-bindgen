@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>argon2-wasm-bindgen</title>
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
+    <!-- https://remixicon.com/icon/code-s-slash-line -->
+    <!--
+      "data:image/svg+xml;base64," + btoa(`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <style>
+            :root { color: black }
+            @media (prefers-color-scheme: dark) {
+              :root { color: white }
+            }
+          </style>
+          <path fill="currentColor" d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z"></path>
+        </svg>
+      `)
+     -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml;base64,CiAgICAgIDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPgogICAgICAgIDxzdHlsZT4KICAgICAgICAgIDpyb290IHsgY29sb3I6IGJsYWNrIH0KICAgICAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAgICAgOnJvb3QgeyBjb2xvcjogd2hpdGUgfQogICAgICAgICAgfQogICAgICAgIDwvc3R5bGU+CiAgICAgICAgPHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjQgMTJMMTguMzQzMSAxNy42NTY5TDE2LjkyODkgMTYuMjQyNkwyMS4xNzE2IDEyTDE2LjkyODkgNy43NTczNkwxOC4zNDMxIDYuMzQzMTVMMjQgMTJaTTIuODI4NDMgMTJMNy4wNzEwNyAxNi4yNDI2TDUuNjU2ODUgMTcuNjU2OUwwIDEyTDUuNjU2ODUgNi4zNDMxNUw3LjA3MTA3IDcuNzU3MzZMMi44Mjg0MyAxMlpNOS43ODg0NSAyMUg3LjY2MDA5TDE0LjIxMTYgM0gxNi4zMzk5TDkuNzg4NDUgMjFaIj48L3BhdGg+CiAgICAgIDwvc3ZnPgogICAgICA="
+    />
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+      }
+    </style>
+    <!--@@INJECT_THEME_SCRIPT@@-->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./src/index.tsx" type="module"></script>
+  </body>
+</html>
