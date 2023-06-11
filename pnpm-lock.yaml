@@ -32,6 +32,9 @@ importers:
 
   packages/app:
     devDependencies:
+      '@hiogawa/argon2-wasm-bindgen':
+        specifier: workspace:*
+        version: link:../..
       '@hiogawa/unocss-preset-antd':
         specifier: 2.2.1-pre.3
         version: 2.2.1-pre.3(@unocss/preset-uno@0.53.1)(unocss@0.53.1)

@@ -9,6 +9,7 @@
     "release-production": "vercel deploy --prebuilt . --prod"
   },
   "devDependencies": {
+    "@hiogawa/argon2-wasm-bindgen": "workspace:*",
     "@hiogawa/unocss-preset-antd": "2.2.1-pre.3",
     "@hiogawa/utils": "1.4.2-pre.12",
     "@hiogawa/utils-experimental": "^0.0.1",
