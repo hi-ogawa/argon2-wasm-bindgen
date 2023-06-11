@@ -1,11 +1,14 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { initSync, verify_password, hash_password } from "../pkg/index.js";
+import initWasmBindgen, {
+  verify_password,
+  hash_password,
+} from "../pkg/index.js";
 import fs from "node:fs";
 
 beforeAll(async () => {
   const wasmSource = await fs.promises.readFile("pkg/index_bg.wasm");
   const wasmModule = await WebAssembly.compile(wasmSource);
-  initSync(wasmModule);
+  await initWasmBindgen(wasmModule);
 });
 
 describe("example", () => {
