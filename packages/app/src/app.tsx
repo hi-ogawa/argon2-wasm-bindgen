@@ -1,5 +1,6 @@
 import {
   Show,
+  createEffect,
   createMemo,
   createResource,
   createSignal,
@@ -9,11 +10,24 @@ import { createStore } from "solid-js/store";
 import { argon2, encodeSalt, initializeArgon2 } from "./argon2-utils";
 
 export function App() {
+  const [argon2Resource] = createResource(initializeArgon2);
+  const argon2Ready = createMemo(() => argon2Resource.state === "ready");
+
+  createEffect(() => {
+    if (argon2Resource.error) {
+      console.error(argon2Resource.error);
+      window.alert("failed to load wasm");
+    }
+  });
+
   return (
     <div class="h-full flex flex-col">
       <AppHeader />
       <div class="flex justify-center">
-        <div class="w-full max-w-md flex flex-col gap-6 p-6">
+        <div class="w-full max-w-md flex flex-col gap-6 p-6 relative">
+          <Show when={!argon2Ready()}>
+            <div class="absolute right-6 antd-spin w-6 h-6"></div>
+          </Show>
           <HashPasswordForm />
           <div class="border-t"></div>
           <VerifyPasswordForm />
@@ -41,10 +55,6 @@ function AppHeader() {
 
 function HashPasswordForm() {
   const [output, setOutput] = createSignal("");
-
-  const [resource] = createResource(initializeArgon2);
-  const resouceReady = createMemo(() => resource.state === "ready");
-
   const [form, setForm] = createStore({
     password: "pepper",
     salt: "abcdefgh",
@@ -57,16 +67,16 @@ function HashPasswordForm() {
         class="flex flex-col gap-3"
         onSubmit={(e) => {
           e.preventDefault();
-          if (!resouceReady()) {
-            return;
+          try {
+            const result = argon2.hash_password(
+              form.password,
+              encodeSalt(form.salt)
+            );
+            setOutput(result);
+          } catch (e) {
+            console.error(e);
+            window.alert("failed to hash password");
           }
-
-          // TODO: use createResource.mutate and show error
-          const result = argon2.hash_password(
-            form.password,
-            encodeSalt(form.salt)
-          );
-          setOutput(result);
         }}
       >
         <label class="flex flex-col gap-1">
@@ -92,12 +102,7 @@ function HashPasswordForm() {
             onChange={(e) => setForm({ salt: e.target.value })}
           />
         </label>
-        <button
-          class="antd-btn antd-btn-primary p-1 my-2"
-          disabled={!resouceReady()}
-        >
-          Hash
-        </button>
+        <button class="antd-btn antd-btn-primary p-1 my-2">Hash</button>
       </form>
       <label class="flex flex-col gap-1">
         <span>Output</span>
@@ -114,10 +119,6 @@ function HashPasswordForm() {
 
 function VerifyPasswordForm() {
   const [output, setOutput] = createSignal<boolean>();
-
-  const [resource] = createResource(initializeArgon2);
-  const resouceReady = createMemo(() => resource.state === "ready");
-
   const [form, setForm] = createStore({
     password: "",
     passwordHash: "",
@@ -130,15 +131,16 @@ function VerifyPasswordForm() {
         class="flex flex-col gap-3"
         onSubmit={(e) => {
           e.preventDefault();
-          if (!resouceReady()) {
-            return;
+          try {
+            const result = argon2.verify_password(
+              form.password,
+              form.passwordHash
+            );
+            setOutput(result);
+          } catch (e) {
+            console.error(e);
+            window.alert("failed to verify password");
           }
-
-          const result = argon2.verify_password(
-            form.password,
-            form.passwordHash
-          );
-          setOutput(result);
         }}
       >
         <label class="flex flex-col gap-1">
@@ -158,10 +160,7 @@ function VerifyPasswordForm() {
             onChange={(e) => setForm({ passwordHash: e.target.value })}
           />
         </label>
-        <button
-          class="antd-btn antd-btn-primary p-1 my-2 flex justify-center items-center relative"
-          disabled={!resouceReady()}
-        >
+        <button class="antd-btn antd-btn-primary p-1 my-2 flex justify-center items-center relative">
           <span>Verify</span>
           <Show when={output() === true}>
             <span class="absolute right-2 i-ri-thumb-up-line w-4 h-4"></span>
