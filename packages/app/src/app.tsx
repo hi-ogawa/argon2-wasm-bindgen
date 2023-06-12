@@ -14,9 +14,12 @@ export function App() {
   const argon2Ready = createMemo(() => argon2Resource.state === "ready");
 
   createEffect(() => {
-    if (argon2Resource.error) {
-      console.error(argon2Resource.error);
-      window.alert("failed to load wasm");
+    const e = argon2Resource.error;
+    if (e) {
+      console.error(e);
+      window.alert(
+        "failed to load wasm" + (e instanceof Error ? `\n\n${e.message}` : "")
+      );
     }
   });
 
@@ -65,17 +68,20 @@ function HashPasswordForm() {
       <h2 class="text-xl">Hash Password</h2>
       <form
         class="flex flex-col gap-3"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           try {
-            const result = argon2.hash_password(
+            const result = await argon2.hash_password(
               form.password,
               encodeSalt(form.salt)
             );
             setOutput(result);
           } catch (e) {
             console.error(e);
-            window.alert("failed to hash password");
+            window.alert(
+              "failed to hash password" +
+                (e instanceof Error ? `\n\n${e.message}` : "")
+            );
           }
         }}
       >
@@ -129,17 +135,20 @@ function VerifyPasswordForm() {
       <h2 class="text-xl">Verify Password</h2>
       <form
         class="flex flex-col gap-3"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           try {
-            const result = argon2.verify_password(
+            const result = await argon2.verify_password(
               form.password,
               form.passwordHash
             );
             setOutput(result);
           } catch (e) {
             console.error(e);
-            window.alert("failed to verify password");
+            window.alert(
+              "failed to verify password" +
+                (e instanceof Error ? `\n\n${e.message}` : "")
+            );
           }
         }}
       >
