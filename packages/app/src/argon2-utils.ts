@@ -1,13 +1,16 @@
-import WASM_URL from "@hiogawa/argon2-wasm-bindgen/pkg/index_bg.wasm?url";
-import initArgon2 from "@hiogawa/argon2-wasm-bindgen";
-import * as argon2 from "@hiogawa/argon2-wasm-bindgen";
 import { once } from "@hiogawa/utils";
+import { Argon2Service } from "./argon2-worker";
+import { Remote, wrap } from "comlink";
 
-// TODO: run in background thread (web worker) to avoid blocking UI.
+export let argon2: Remote<Argon2Service>;
 
-export { argon2 };
-
-export const initializeArgon2 = once(() => initArgon2(WASM_URL));
+export const initializeArgon2 = once(async () => {
+  const worker = new Worker(new URL("./argon2-worker.ts", import.meta.url), {
+    type: "module",
+  });
+  argon2 = wrap<Argon2Service>(worker);
+  await argon2.initialize();
+});
 
 export function encodeSalt(salt: string) {
   // base64 without "=" padding
