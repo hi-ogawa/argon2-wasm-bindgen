@@ -6,6 +6,6 @@ export default defineConfig({
   dts: true,
   esbuildOptions(options, _context) {
     const loader = (options.loader ??= {});
-    loader[".wasm"] = "binary";
+    loader[".wasm"] = "base64";
   },
 });
