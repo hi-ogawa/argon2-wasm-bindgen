@@ -8,6 +8,7 @@ import {
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { argon2, encodeSalt, initializeArgon2 } from "./argon2-utils";
+import { measureAsync } from "./utils";
 
 export function App() {
   const [argon2Resource] = createResource(initializeArgon2);
@@ -58,6 +59,7 @@ function AppHeader() {
 
 function HashPasswordForm() {
   const [output, setOutput] = createSignal("");
+  const [time, setTime] = createSignal<number>();
   const [form, setForm] = createStore({
     password: "pepper",
     salt: "abcdefgh",
@@ -71,11 +73,16 @@ function HashPasswordForm() {
         onSubmit={async (e) => {
           e.preventDefault();
           try {
-            const result = await argon2.hash_password(
-              form.password,
-              encodeSalt(form.salt)
-            );
+            let result!: string;
+            // very rough measurement including worker communication
+            const time = await measureAsync(async () => {
+              result = await argon2.hash_password(
+                form.password,
+                encodeSalt(form.salt)
+              );
+            });
             setOutput(result);
+            setTime(time);
           } catch (e) {
             console.error(e);
             window.alert(
@@ -108,10 +115,19 @@ function HashPasswordForm() {
             onChange={(e) => setForm({ salt: e.target.value })}
           />
         </label>
-        <button class="antd-btn antd-btn-primary p-1 my-2">Hash</button>
+        <button class="antd-btn antd-btn-primary p-1">Hash</button>
       </form>
       <label class="flex flex-col gap-1">
-        <span>Output</span>
+        <span class="flex items-baseline gap-1">
+          Output
+          <Show when={time()}>
+            {(t) => (
+              <span class="text-colorTextLabel text-sm">
+                (finished in {Math.ceil(t())}ms)
+              </span>
+            )}
+          </Show>
+        </span>
         <textarea
           class="antd-input p-1 bg-colorBgContainerDisabled font-mono"
           readOnly
@@ -125,8 +141,9 @@ function HashPasswordForm() {
 
 function VerifyPasswordForm() {
   const [output, setOutput] = createSignal<boolean>();
+  const [time, setTime] = createSignal<number>();
   const [form, setForm] = createStore({
-    password: "",
+    password: "pepper",
     passwordHash: "",
   });
 
@@ -138,11 +155,15 @@ function VerifyPasswordForm() {
         onSubmit={async (e) => {
           e.preventDefault();
           try {
-            const result = await argon2.verify_password(
-              form.password,
-              form.passwordHash
-            );
+            let result!: boolean;
+            const time = await measureAsync(async () => {
+              result = await argon2.verify_password(
+                form.password,
+                form.passwordHash
+              );
+            });
             setOutput(result);
+            setTime(time);
           } catch (e) {
             console.error(e);
             window.alert(
@@ -157,6 +178,7 @@ function VerifyPasswordForm() {
           <input
             class="antd-input px-1"
             required
+            value={untrack(() => form.password)}
             onChange={(e) => setForm({ password: e.target.value })}
           />
         </label>
@@ -169,15 +191,24 @@ function VerifyPasswordForm() {
             onChange={(e) => setForm({ passwordHash: e.target.value })}
           />
         </label>
-        <button class="antd-btn antd-btn-primary p-1 my-2 flex justify-center items-center relative">
-          <span>Verify</span>
-          <Show when={output() === true}>
-            <span class="absolute right-2 i-ri-thumb-up-line w-4 h-4"></span>
+        <div class="flex flex-col gap-1">
+          <button class="antd-btn antd-btn-primary p-1 flex justify-center items-center relative">
+            <span>Verify</span>
+            <Show when={output() === true}>
+              <span class="absolute right-2 i-ri-thumb-up-line w-4 h-4"></span>
+            </Show>
+            <Show when={output() === false}>
+              <span class="absolute right-2 i-ri-thumb-down-line w-4 h-4"></span>
+            </Show>
+          </button>
+          <Show when={time()}>
+            {(t) => (
+              <span class="self-end text-colorTextLabel text-sm">
+                (finished in {Math.ceil(t())}ms)
+              </span>
+            )}
           </Show>
-          <Show when={output() === false}>
-            <span class="absolute right-2 i-ri-thumb-down-line w-4 h-4"></span>
-          </Show>
-        </button>
+        </div>
       </form>
     </div>
   );
