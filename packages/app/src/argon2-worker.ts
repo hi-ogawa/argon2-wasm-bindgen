@@ -10,7 +10,6 @@ class Argon2Service {
     await initArgon2(WASM_URL);
   }
 
-  // TODO: measure time
   hash_password = argon2.hash_password;
   verify_password = argon2.verify_password;
 }
