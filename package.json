@@ -39,7 +39,7 @@
     "lint-check:prettier": "prettier --cache --check .",
     "lint:cargo-fmt": "cargo fmt",
     "lint-check:cargo-fmt": "cargo fmt --check",
-    "tsc": "tsc -b",
+    "tsc": "tsc -b tsconfig.all.json",
     "test": "vitest",
     "release": "pnpm publish --no-git-checks --access public"
   },
