@@ -1,12 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import {
-  hash_password,
-  verify_password,
-  initializeBundle,
-} from "../dist/index-wasm-bundle";
+import { initBundle, hash_password, verify_password } from "../dist/bundle";
 
 beforeAll(async () => {
-  await initializeBundle();
+  await initBundle();
 });
 
 describe("bundle", () => {

@@ -1,15 +1,13 @@
 import { once } from "@hiogawa/utils";
-import { Argon2Service } from "./argon2-worker";
-import { Remote, wrap } from "comlink";
+import { initWorker } from "@hiogawa/argon2-wasm-bindgen/dist/worker-web";
 
-export let argon2: Remote<Argon2Service>;
+export let worker: Awaited<ReturnType<typeof initWorker>>;
+export let argon2: (typeof worker)["argon2"];
 
 export const initializeArgon2 = once(async () => {
-  const worker = new Worker(new URL("./argon2-worker.ts", import.meta.url), {
-    type: "module",
-  });
-  argon2 = wrap<Argon2Service>(worker);
-  await argon2.initialize();
+  worker = await initWorker();
+  argon2 = worker.argon2;
+  await argon2.initBundle();
 });
 
 export function encodeSalt(salt: string) {
