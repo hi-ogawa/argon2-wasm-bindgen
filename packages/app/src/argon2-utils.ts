@@ -1,8 +1,8 @@
 import { once } from "@hiogawa/utils";
 import { Remote, wrap } from "comlink";
-import type { Argon2Comlink } from "@hiogawa/argon2-wasm-bindgen/dist/comlink";
+import { Argon2 } from "@hiogawa/argon2-wasm-bindgen/dist/comlink";
 
-export let argon2: Remote<Argon2Comlink>;
+export let argon2: Remote<Argon2>;
 
 export const initializeArgon2 = once(async () => {
   const worker = new Worker(
@@ -12,7 +12,7 @@ export const initializeArgon2 = once(async () => {
     }
   );
   argon2 = wrap(worker);
-  await argon2.initialize();
+  await argon2.initBundle();
 });
 
 export function encodeSalt(salt: string) {

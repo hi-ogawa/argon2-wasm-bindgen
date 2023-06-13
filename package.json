@@ -1,6 +1,6 @@
 {
   "name": "@hiogawa/argon2-wasm-bindgen",
-  "version": "0.0.4-pre.1",
+  "version": "0.0.4-pre.2",
   "type": "module",
   "main": "./dist/bundle.js",
   "types": "./dist/bundle.d.ts",
@@ -14,6 +14,11 @@
       "import": "./dist/comlink.js",
       "require": "./dist/comlink.cjs",
       "types": "./dist/comlink.d.js"
+    },
+    "./dist/comlink-node": {
+      "import": "./dist/comlink-node.js",
+      "require": "./dist/comlink-node.cjs",
+      "types": "./dist/comlink-node.d.js"
     },
     "./pkg": {
       "import": "./pkg/index.js",
@@ -50,7 +55,9 @@
     "release": "pnpm publish --no-git-checks --access public"
   },
   "devDependencies": {
+    "@hiogawa/utils": "1.4.2-pre.12",
     "@tsconfig/strictest": "^2.0.1",
+    "@types/node": "^20.3.1",
     "comlink": "^4.4.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.8",
