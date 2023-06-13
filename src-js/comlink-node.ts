@@ -1,4 +1,4 @@
-import * as argon2 from "@hiogawa/argon2-wasm-bindgen";
+import * as argon2 from "./bundle";
 import { expose } from "comlink";
 import comlinkNodeAdapter from "comlink/dist/umd/node-adapter";
 import { parentPort } from "node:worker_threads";
