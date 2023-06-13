@@ -1,5 +1,3 @@
-import WASM_URL from "@hiogawa/argon2-wasm-bindgen/pkg/index_bg.wasm?url";
-import initArgon2 from "@hiogawa/argon2-wasm-bindgen";
 import * as argon2 from "@hiogawa/argon2-wasm-bindgen";
 import { expose } from "comlink";
 
@@ -7,7 +5,7 @@ export type { Argon2Service };
 
 class Argon2Service {
   async initialize() {
-    await initArgon2(WASM_URL);
+    await argon2.initBundle();
   }
 
   hash_password = argon2.hash_password;

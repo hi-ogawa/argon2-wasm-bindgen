@@ -2,21 +2,22 @@
   "name": "@hiogawa/argon2-wasm-bindgen",
   "version": "0.0.3",
   "type": "module",
-  "main": "./pkg/index.js",
-  "types": "./pkg/index.d.ts",
+  "main": "./dist/bundle.js",
+  "types": "./dist/bundle.d.ts",
   "exports": {
     ".": {
+      "import": "./dist/bundle.js",
+      "require": "./dist/bundle.cjs",
+      "types": "./dist/bundle.d.js"
+    },
+    "./pkg": {
       "import": "./pkg/index.js",
+      "require": "./pkg/index.cjs",
       "types": "./pk/index.d.ts"
     },
     "./pkg/index_bg.wasm": {
       "import": "./pkg/index_bg.wasm",
       "require": "./pkg/index_bg.wasm"
-    },
-    "./dist/bundle": {
-      "import": "./dist/bundle.js",
-      "require": "./dist/bundle.cjs",
-      "types": "./dist/bundle.d.js"
     }
   },
   "files": [
