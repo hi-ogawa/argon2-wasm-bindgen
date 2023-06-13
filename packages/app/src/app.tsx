@@ -43,7 +43,7 @@ export function App() {
 
 function AppHeader() {
   return (
-    <header class="flex items-center gap-2 p-2 px-4 shadow-md shadow-black/[0.05] dark:shadow-black/[0.7]">
+    <header class="sticky top-0 antd-body z-1 flex items-center gap-2 p-2 px-4 shadow-md shadow-black/[0.05] dark:shadow-black/[0.7]">
       <h1 class="text-lg">Argon2 WasmBindgen</h1>
       <span class="flex-1"></span>
       <a
