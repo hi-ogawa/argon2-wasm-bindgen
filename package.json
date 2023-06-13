@@ -10,10 +10,15 @@
       "require": "./dist/bundle.cjs",
       "types": "./dist/bundle.d.js"
     },
-    "./dist/comlink": {
-      "import": "./dist/comlink.js",
-      "require": "./dist/comlink.cjs",
-      "types": "./dist/comlink.d.js"
+    "./dist/comlink-web": {
+      "import": "./dist/comlink-web.js",
+      "require": "./dist/comlink-web.cjs",
+      "types": "./dist/comlink-web.d.js"
+    },
+    "./dist/comlink-web-proxy": {
+      "import": "./dist/comlink-web-proxy.js",
+      "require": "./dist/comlink-web-proxy.cjs",
+      "types": "./dist/comlink-web-proxy.d.js"
     },
     "./dist/comlink-node": {
       "import": "./dist/comlink-node.js",

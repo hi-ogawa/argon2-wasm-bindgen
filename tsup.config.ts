@@ -8,9 +8,10 @@ export default [
   process.env["BUILD_STEP"] == "1" &&
     defineConfig([
       {
-        entry: ["src-js/bundle.ts", "src-js/comlink.ts"],
+        entry: ["src-js/bundle.ts", "src-js/comlink-web.ts"],
         format: ["esm", "cjs"],
         dts: true,
+        splitting: false,
         platform: "neutral",
         loader: {
           ".wasm": "binary",
@@ -20,6 +21,7 @@ export default [
         entry: ["src-js/comlink-node.ts"],
         format: ["esm", "cjs"],
         dts: true,
+        splitting: false,
         platform: "node",
         loader: {
           ".wasm": "binary",
@@ -29,9 +31,22 @@ export default [
   process.env["BUILD_STEP"] == "2" &&
     defineConfig([
       {
+        entry: ["src-js/comlink-web-proxy.ts"],
+        format: ["esm", "cjs"],
+        dts: true,
+        splitting: false,
+        platform: "neutral",
+        define: {
+          DEFINE_WORKER_CODE: JSON.stringify(
+            fs.readFileSync("./dist/comlink-web.js", "utf-8")
+          ),
+        },
+      },
+      {
         entry: ["src-js/comlink-node-proxy.ts"],
         format: ["esm", "cjs"],
         dts: true,
+        splitting: false,
         platform: "node",
         define: {
           DEFINE_WORKER_CODE: JSON.stringify(
