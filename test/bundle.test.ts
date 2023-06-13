@@ -1,14 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import initWasmBindGen, {
-  hash_password,
-  verify_password,
-} from "../dist/index-tsup";
-import { WASM_BASE64 } from "../dist/wasm-base64";
+import { initBundle, hash_password, verify_password } from "../dist/bundle";
 
 beforeAll(async () => {
-  const wasmSource = Buffer.from(WASM_BASE64, "base64");
-  const wasmModule = await WebAssembly.compile(wasmSource);
-  await initWasmBindGen(wasmModule);
+  await initBundle();
 });
 
 describe("bundle", () => {
