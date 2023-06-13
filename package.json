@@ -1,6 +1,6 @@
 {
   "name": "@hiogawa/argon2-wasm-bindgen",
-  "version": "0.0.4-pre.3",
+  "version": "0.0.4-pre.4",
   "type": "module",
   "main": "./dist/bundle.js",
   "types": "./dist/bundle.d.ts",
@@ -21,9 +21,9 @@
       "types": "./dist/comlink-node.d.js"
     },
     "./dist/comlink-node-proxy": {
-      "import": "./dist/comlink-proxy.js",
-      "require": "./dist/comlink-proxy.cjs",
-      "types": "./dist/comlink-node.d.js"
+      "import": "./dist/comlink-node-proxy.js",
+      "require": "./dist/comlink-node-proxy.cjs",
+      "types": "./dist/comlink-node-proxy.d.js"
     },
     "./pkg": {
       "import": "./pkg/index.js",
