@@ -13,10 +13,15 @@
       "import": "./pkg/index_bg.wasm",
       "require": "./pkg/index_bg.wasm"
     },
-    "./dist/index-wasm-bundle": {
-      "import": "./dist/index-wasm-bundle.js",
-      "require": "./dist/index-wasm-bundle.cjs",
-      "types": "./dist/index-wasm-bundle.d.js"
+    "./dist/index-tsup": {
+      "import": "./dist/index-tsup.js",
+      "require": "./dist/index-tsup.cjs",
+      "types": "./dist/index-tsup.d.js"
+    },
+    "./dist/wasm-base64": {
+      "import": "./dist/wasm-base64.js",
+      "require": "./dist/wasm-base64.cjs",
+      "types": "./dist/wasm-base64.d.js"
     }
   },
   "files": [
