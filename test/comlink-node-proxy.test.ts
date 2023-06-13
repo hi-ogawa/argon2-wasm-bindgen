@@ -1,17 +1,17 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { initComlinkProxy } from "../dist/comlink-node-proxy";
+import { initWorker } from "../dist/worker-node";
 
-let proxy: Awaited<ReturnType<typeof initComlinkProxy>>;
+let worker: Awaited<ReturnType<typeof initWorker>>;
 
 beforeAll(async () => {
-  proxy = await initComlinkProxy();
-  return () => proxy.worker.terminate();
+  worker = await initWorker();
+  return () => worker.worker.terminate();
 });
 
 describe("bundle", () => {
   // prettier-ignore
   it("basic", async () => {
-    const argon2 = proxy.argon2;
+    const argon2 = worker.argon2;
     await argon2.initBundle();
 
     const password = "password";

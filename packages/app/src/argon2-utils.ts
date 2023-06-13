@@ -1,12 +1,12 @@
 import { once } from "@hiogawa/utils";
-import { initComlinkProxy } from "@hiogawa/argon2-wasm-bindgen/dist/comlink-web-proxy";
+import { initWorker } from "@hiogawa/argon2-wasm-bindgen/dist/worker-web";
 
-export let proxy: Awaited<ReturnType<typeof initComlinkProxy>>;
-export let argon2: (typeof proxy)["argon2"];
+export let worker: Awaited<ReturnType<typeof initWorker>>;
+export let argon2: (typeof worker)["argon2"];
 
 export const initializeArgon2 = once(async () => {
-  proxy = await initComlinkProxy();
-  argon2 = proxy.argon2;
+  worker = await initWorker();
+  argon2 = worker.argon2;
   await argon2.initBundle();
 });
 

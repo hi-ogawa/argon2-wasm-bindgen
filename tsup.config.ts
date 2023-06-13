@@ -8,7 +8,7 @@ export default [
   process.env["BUILD_STEP"] == "1" &&
     defineConfig([
       {
-        entry: ["src-js/bundle.ts", "src-js/comlink-web.ts"],
+        entry: ["src-js/bundle.ts", "src-js/worker-web-main.ts"],
         format: ["esm", "cjs"],
         dts: true,
         splitting: false,
@@ -18,7 +18,7 @@ export default [
         },
       },
       {
-        entry: ["src-js/comlink-node.ts"],
+        entry: ["src-js/worker-node-main.ts"],
         format: ["esm", "cjs"],
         dts: true,
         splitting: false,
@@ -31,26 +31,26 @@ export default [
   process.env["BUILD_STEP"] == "2" &&
     defineConfig([
       {
-        entry: ["src-js/comlink-web-proxy.ts"],
+        entry: ["src-js/worker-web.ts"],
         format: ["esm", "cjs"],
         dts: true,
         splitting: false,
         platform: "neutral",
         define: {
           DEFINE_WORKER_CODE: JSON.stringify(
-            fs.readFileSync("./dist/comlink-web.js", "utf-8")
+            fs.readFileSync("./dist/worker-web-main.js", "utf-8")
           ),
         },
       },
       {
-        entry: ["src-js/comlink-node-proxy.ts"],
+        entry: ["src-js/worker-node.ts"],
         format: ["esm", "cjs"],
         dts: true,
         splitting: false,
         platform: "node",
         define: {
           DEFINE_WORKER_CODE: JSON.stringify(
-            fs.readFileSync("./dist/comlink-node.js", "utf-8")
+            fs.readFileSync("./dist/worker-node-main.js", "utf-8")
           ),
         },
       },
