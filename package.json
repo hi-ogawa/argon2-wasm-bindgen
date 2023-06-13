@@ -1,6 +1,6 @@
 {
   "name": "@hiogawa/argon2-wasm-bindgen",
-  "version": "0.0.4-pre.0",
+  "version": "0.0.4-pre.1",
   "type": "module",
   "main": "./dist/bundle.js",
   "types": "./dist/bundle.d.ts",
