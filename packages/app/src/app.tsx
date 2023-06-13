@@ -63,6 +63,9 @@ function HashPasswordForm() {
   const [form, setForm] = createStore({
     password: "pepper",
     salt: "abcdefgh",
+    m: 19 * 2 ** 10,
+    t: 2,
+    p: 1,
   });
 
   return (
@@ -78,7 +81,12 @@ function HashPasswordForm() {
             const time = await measureAsync(async () => {
               result = await argon2.hash_password(
                 form.password,
-                encodeSalt(form.salt)
+                encodeSalt(form.salt),
+                undefined,
+                undefined,
+                form.m,
+                form.t,
+                form.p
               );
             });
             setOutput(result);
@@ -113,6 +121,39 @@ function HashPasswordForm() {
             minLength={8}
             value={untrack(() => form.salt)}
             onChange={(e) => setForm({ salt: e.target.value })}
+          />
+        </label>
+        <label class="flex flex-col gap-1">
+          <span class="flex items-baseline gap-2">
+            <span>M cost</span>
+          </span>
+          <input
+            type="number"
+            class="antd-input px-1"
+            value={untrack(() => form.m)}
+            onChange={(e) => setForm({ m: e.target.valueAsNumber })}
+          />
+        </label>
+        <label class="flex flex-col gap-1">
+          <span class="flex items-baseline gap-2">
+            <span>T cost</span>
+          </span>
+          <input
+            type="number"
+            class="antd-input px-1"
+            value={untrack(() => form.t)}
+            onChange={(e) => setForm({ t: e.target.valueAsNumber })}
+          />
+        </label>
+        <label class="flex flex-col gap-1">
+          <span class="flex items-baseline gap-2">
+            <span>P cost</span>
+          </span>
+          <input
+            type="number"
+            class="antd-input px-1"
+            value={untrack(() => form.p)}
+            onChange={(e) => setForm({ p: e.target.valueAsNumber })}
           />
         </label>
         <button class="antd-btn antd-btn-primary p-1">Hash</button>
