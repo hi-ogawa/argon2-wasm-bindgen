@@ -7,27 +7,22 @@
   "exports": {
     ".": {
       "import": "./dist/bundle.js",
-      "require": "./dist/bundle.cjs",
       "types": "./dist/bundle.d.js"
     },
     "./dist/worker-web": {
       "import": "./dist/worker-web.js",
-      "require": "./dist/worker-web.cjs",
       "types": "./dist/worker-web.d.js"
     },
     "./dist/worker-node": {
       "import": "./dist/worker-node.js",
-      "require": "./dist/worker-node.cjs",
       "types": "./dist/worker-node.d.js"
     },
     "./pkg": {
       "import": "./pkg/index.js",
-      "require": "./pkg/index.cjs",
       "types": "./pk/index.d.ts"
     },
     "./pkg/index_bg.wasm": {
-      "import": "./pkg/index_bg.wasm",
-      "require": "./pkg/index_bg.wasm"
+      "import": "./pkg/index_bg.wasm"
     }
   },
   "files": [
@@ -44,8 +39,7 @@
     "build": "run-s build:*",
     "build:wasm": "wasm-pack build --target web --out-name index ${BUILD_TYPE:---release}",
     "build:fix-pkg": "rm -f pkg/package.json pkg/.gitignore pkg/README.md",
-    "build:tsup1": "BUILD_STEP=1 tsup",
-    "build:tsup2": "BUILD_STEP=2 tsup",
+    "build:tsup": "BUILD_STEP=0 tsup && BUILD_STEP=1 tsup",
     "lint": "run-s lint:*",
     "lint-check": "run-s lint-check:*",
     "lint:prettier": "prettier --cache --write .",
