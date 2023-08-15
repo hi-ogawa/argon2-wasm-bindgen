@@ -12,7 +12,6 @@ describe("bundle", () => {
   // prettier-ignore
   it("basic", async () => {
     const argon2 = worker.argon2;
-    await argon2.initBundle();
 
     const password = "password";
     const salt = btoa("salt".repeat(3));
