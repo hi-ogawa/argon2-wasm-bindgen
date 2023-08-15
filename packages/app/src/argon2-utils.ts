@@ -7,7 +7,6 @@ export let argon2: (typeof worker)["argon2"];
 export const initializeArgon2 = once(async () => {
   worker = await initWorker();
   argon2 = worker.argon2;
-  await argon2.initBundle();
 });
 
 export function encodeSalt(salt: string) {

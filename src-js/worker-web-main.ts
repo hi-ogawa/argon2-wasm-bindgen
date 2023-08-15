@@ -1,10 +1,18 @@
 import * as argon2 from "./bundle";
-import { expose } from "comlink";
+import {
+  exposeRpc,
+  messagePortServerAdapter,
+} from "@hiogawa/tiny-rpc/dist/index-v2";
 
 export type Argon2 = typeof argon2;
 
 function main() {
-  expose(argon2);
+  exposeRpc({
+    routes: argon2,
+    adapter: messagePortServerAdapter({
+      port: globalThis,
+    }),
+  });
 }
 
 main();
