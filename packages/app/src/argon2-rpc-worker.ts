@@ -9,11 +9,10 @@ function main() {
     adapter: messagePortServerAdapter({
       port: globalThis,
       onError(e) {
-        console.error(e);
+        console.error("[TinyRpcWorker]", e);
       },
     }),
   });
-  console.log(argon2);
 }
 
 main();
