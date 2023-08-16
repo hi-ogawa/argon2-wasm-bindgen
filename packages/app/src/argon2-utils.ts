@@ -2,16 +2,16 @@ import { once } from "@hiogawa/utils";
 import Argon2Worker from "./argon2-rpc-worker?worker";
 import type { Argon2 } from "./argon2-rpc-worker";
 import {
-  proxyRpc,
+  proxyTinyRpc,
   messagePortClientAdapter,
-  RpcRoutesAsync,
-} from "@hiogawa/tiny-rpc/dist/index-v2";
+  TinyRpcProxy,
+} from "@hiogawa/tiny-rpc";
 
-export let argon2: RpcRoutesAsync<Argon2>;
+export let argon2: TinyRpcProxy<Argon2>;
 
 export const initializeArgon2 = once(async () => {
   const worker = new Argon2Worker();
-  argon2 = proxyRpc<Argon2>({
+  argon2 = proxyTinyRpc<Argon2>({
     adapter: messagePortClientAdapter({
       port: worker,
     }),
