@@ -1,12 +1,21 @@
 import { once } from "@hiogawa/utils";
-import { initWorker } from "@hiogawa/argon2-wasm-bindgen/dist/worker-web";
+import Argon2Worker from "./argon2-rpc-worker?worker";
+import type { Argon2 } from "./argon2-rpc-worker";
+import {
+  proxyTinyRpc,
+  messagePortClientAdapter,
+  TinyRpcProxy,
+} from "@hiogawa/tiny-rpc";
 
-export let worker: Awaited<ReturnType<typeof initWorker>>;
-export let argon2: (typeof worker)["argon2"];
+export let argon2: TinyRpcProxy<Argon2>;
 
 export const initializeArgon2 = once(async () => {
-  worker = await initWorker();
-  argon2 = worker.argon2;
+  const worker = new Argon2Worker();
+  argon2 = proxyTinyRpc<Argon2>({
+    adapter: messagePortClientAdapter({
+      port: worker,
+    }),
+  });
   await argon2.initBundle();
 });
 

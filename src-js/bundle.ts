@@ -7,6 +7,5 @@ export async function initBundle() {
   await initWasmBindGen(wasmModule);
 }
 
-// re-export everything
-export { default } from "../pkg/index";
-export * from "../pkg/index";
+// re-export
+export { hash_password, verify_password } from "../pkg/index";
