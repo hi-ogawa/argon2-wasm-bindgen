@@ -44,15 +44,15 @@ importers:
       '@hiogawa/argon2-wasm-bindgen':
         specifier: workspace:*
         version: link:../..
+      '@hiogawa/theme-script':
+        specifier: 0.0.4-pre.3
+        version: 0.0.4-pre.3(vite@4.3.9)
       '@hiogawa/unocss-preset-antd':
         specifier: 2.2.1-pre.3
         version: 2.2.1-pre.3(@unocss/preset-uno@0.53.1)(unocss@0.53.1)
       '@hiogawa/utils':
         specifier: 1.4.2-pre.12
         version: 1.4.2-pre.12
-      '@hiogawa/utils-experimental':
-        specifier: ^0.0.1
-        version: 0.0.1
       '@iconify-json/ri':
         specifier: ^1.1.4
         version: 1.1.9
@@ -622,6 +622,17 @@ packages:
     dev: true
     optional: true
 
+  /@hiogawa/theme-script@0.0.4-pre.3(vite@4.3.9):
+    resolution: {integrity: sha512-2uxVhemdAMUFE/OaUcaTT2QeZsXnxtnF/CLNs+CcrlgwaUXXfsnXUTvUZCz8MTmxzzz4Vp5hfAyi4pp58XHJCQ==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      vite: 4.3.9(@types/node@20.3.1)
+    dev: true
+
   /@hiogawa/tiny-rpc@0.2.3-pre.8:
     resolution: {integrity: sha512-m58kjGYCgJPpBsKIOQO4rEHHqGd8+E2BvMAwVKZDC7OLGAT1O22Hnct2c1JBHinoN/98BLOxmF3F0D4w0zJhYg==}
     dev: true
@@ -636,10 +647,6 @@ packages:
       '@unocss/reset': 0.48.5
       local-pkg: 0.4.3
       unocss: 0.53.1(postcss@8.4.24)(vite@4.3.9)
-    dev: true
-
-  /@hiogawa/utils-experimental@0.0.1:
-    resolution: {integrity: sha512-7YNq6WRghFuuZYRK1FvSWlL4w9Qu32OE40FgBpxQjrwaXw9U5efU/jyZI7WaJ/RbqL3PCHr2InFc2SVpyXHG9g==}
     dev: true
 
   /@hiogawa/utils@1.4.2-pre.12:

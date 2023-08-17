@@ -9,6 +9,7 @@ import {
 import { createStore } from "solid-js/store";
 import { argon2, encodeSalt, initializeArgon2 } from "./argon2-utils";
 import { measureAsync } from "./utils";
+import { getTheme, setTheme } from "@hiogawa/theme-script";
 
 export function App() {
   const [argon2Resource] = createResource(initializeArgon2);
@@ -43,9 +44,13 @@ export function App() {
 
 function AppHeader() {
   return (
-    <header class="sticky top-0 antd-body z-1 flex items-center gap-2 p-2 px-4 shadow-md shadow-black/[0.05] dark:shadow-black/[0.7]">
+    <header class="sticky top-0 antd-body z-1 flex items-center gap-3 p-2 px-4 shadow-md shadow-black/[0.05] dark:shadow-black/[0.7]">
       <h1 class="text-lg">Argon2 WasmBindgen</h1>
       <span class="flex-1"></span>
+      <button
+        class="light:i-ri-moon-line dark:i-ri-sun-line !w-6 !h-6"
+        onClick={() => setTheme(getTheme() === "dark" ? "light" : "dark")}
+      ></button>
       <a
         class="flex items-center antd-btn antd-btn-ghost"
         href="https://github.com/hi-ogawa/argon2-wasm-bindgen"

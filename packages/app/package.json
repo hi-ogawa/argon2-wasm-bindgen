@@ -10,9 +10,9 @@
   },
   "devDependencies": {
     "@hiogawa/argon2-wasm-bindgen": "workspace:*",
+    "@hiogawa/theme-script": "0.0.4-pre.3",
     "@hiogawa/unocss-preset-antd": "2.2.1-pre.3",
     "@hiogawa/utils": "1.4.2-pre.12",
-    "@hiogawa/utils-experimental": "^0.0.1",
     "@iconify-json/ri": "^1.1.4",
     "solid-js": "^1.7.6",
     "unocss": "^0.53.1",
