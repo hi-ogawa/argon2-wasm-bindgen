@@ -42,7 +42,7 @@ export default [
     },
     {
       entry: ["src-js/worker-node.ts"],
-      format: ["esm"],
+      format: ["esm", "cjs"],
       dts: true,
       splitting: false,
       platform: "node",
