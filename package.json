@@ -1,6 +1,6 @@
 {
   "name": "@hiogawa/argon2-wasm-bindgen",
-  "version": "0.0.6-pre.3",
+  "version": "0.0.6-pre.4",
   "type": "module",
   "main": "./dist/bundle.js",
   "types": "./dist/bundle.d.ts",
@@ -15,6 +15,7 @@
     },
     "./dist/worker-node": {
       "import": "./dist/worker-node.js",
+      "require": "./dist/worker-node.cjs",
       "types": "./dist/worker-node.d.js"
     },
     "./pkg": {
