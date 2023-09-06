@@ -1,6 +1,6 @@
 import { once } from "@hiogawa/utils";
-import Argon2Worker from "./argon2-rpc-worker?worker";
-import type { Argon2 } from "./argon2-rpc-worker";
+import Argon2Worker from "./worker?worker";
+import type { Argon2 } from "./worker";
 import {
   proxyTinyRpc,
   messagePortClientAdapter,
