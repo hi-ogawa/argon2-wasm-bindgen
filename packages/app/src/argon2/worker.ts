@@ -8,9 +8,6 @@ function main() {
     routes: argon2,
     adapter: messagePortServerAdapter({
       port: globalThis,
-      onError(e) {
-        console.error("[TinyRpcWorker]", e);
-      },
     }),
   });
 }

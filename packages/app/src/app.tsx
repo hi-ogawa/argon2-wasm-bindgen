@@ -7,7 +7,7 @@ import {
   untrack,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-import { argon2, encodeSalt, initializeArgon2 } from "./argon2-utils";
+import { argon2, encodeSalt, initializeArgon2 } from "./argon2/proxy";
 import { measureAsync } from "./utils";
 import { getTheme, setTheme } from "@hiogawa/theme-script";
 
