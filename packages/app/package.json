@@ -17,6 +17,7 @@
     "solid-js": "^1.7.6",
     "unocss": "^0.53.1",
     "vite": "^4.3.9",
-    "vite-plugin-solid": "^2.7.0"
+    "vite-plugin-solid": "^2.7.0",
+    "vite-plugin-wasm": "^3.3.0"
   }
 }
