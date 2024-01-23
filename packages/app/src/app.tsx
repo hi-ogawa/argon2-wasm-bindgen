@@ -11,6 +11,10 @@ import { argon2, encodeSalt, initializeArgon2 } from "./argon2/proxy";
 import { measureAsync } from "./utils";
 import { getTheme, setTheme } from "@hiogawa/theme-script";
 
+// @ts-ignore
+import * as wasmExports from "@hiogawa/argon2-wasm-bindgen/pkg/index_bg.wasm";
+console.log(wasmExports);
+
 export function App() {
   const [argon2Resource] = createResource(initializeArgon2);
   const argon2Ready = createMemo(() => argon2Resource.state === "ready");
