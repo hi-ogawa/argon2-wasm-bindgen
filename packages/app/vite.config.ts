@@ -2,7 +2,7 @@ import unocss from "unocss/vite";
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
 import { themeScriptPlugin } from "@hiogawa/theme-script/dist/vite";
-import vitePluginWasm from "vite-plugin-wasm"
+import vitePluginWasm from "vite-plugin-wasm";
 
 export default defineConfig({
   build: {

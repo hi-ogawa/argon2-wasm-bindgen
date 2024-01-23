@@ -1,8 +1,12 @@
-const mod = await WebAssembly.compile(fs.readFile("./pkg/index_bg.wasm"))
-const imports = WebAssembly.Module.imports(mod)
+import fs from "node:fs";
+
+const mod = await WebAssembly.compile(fs.readFileSync("./pkg/index_bg.wasm"));
+const imports = WebAssembly.Module.imports(mod);
+console.log(imports);
 // [ { module: 'wbg', name: '__wbindgen_error_new', kind: 'function' } ]
 
-const exports = WebAssembly.Module.exports(mod)
+const exports = WebAssembly.Module.exports(mod);
+console.log(exports);
 // [
 //   { name: 'memory', kind: 'memory' },
 //   { name: 'hash_password', kind: 'function' },
